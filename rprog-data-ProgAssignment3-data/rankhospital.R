@@ -7,7 +7,7 @@
 ## state and outcome params are validated.
 ##
 ## Usage:
-##      best(state = "", outcome = "", num = 1)
+##      best(state = "", outcome = "", num = "best")
 ##
 ## Arguments:
 ##      state - (2) character appreviated name of a US state available in care measures
@@ -71,6 +71,5 @@ rankhospital <- function(state, outcome, num = "best") {
     
     ## 5. Only up to rank provided
     #ranked[,c(1, outcomeCol)][1:num,]
-    ranked[[1]][num]
-    
+    ranked[[1]][num]    
 }
