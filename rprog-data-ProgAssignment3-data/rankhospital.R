@@ -55,10 +55,22 @@ rankhospital <- function(state, outcome, num = "best") {
     stateHospitalRates[[outcomeCol]][stateHospitalRates[[outcomeCol]] == "Not Available"] <- NA
     
     ## 4. Order ascending by outcome named column
-    ranked <- stateHospitalRates[order(as.numeric(stateHospitalRates[[outcomeCol]])),]
+    ranked <- stateHospitalRates[order(as.numeric(stateHospitalRates[[outcomeCol]]), stateHospitalRates[[1]] ),]
+
+    if(!is.numeric(num)) {
+        if(identical("best", num)) {
+            num <- 1
+        }
+        else if(identical("worst", num)) {
+            num <- length(na.omit(ranked[,outcomeCol]))   
+        }
+        else {
+            num <- 0
+        }
+    }
     
     ## 5. Only up to rank provided
-    ranked[,c(1, outcomeCol)][1:num,]
-
+    #ranked[,c(1, outcomeCol)][1:num,]
+    ranked[[1]][num]
     
 }
